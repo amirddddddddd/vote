@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شورای دانش‌آموزی ۱۴۰۵-۱۴۰۶ | امیرحسن صادقی علوی</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <style>
+        :root {
+            --bg: #0b0f19;
+            --card: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.1);
+            --primary: #6366f1;
+            --accent: #06b6d4;
+            --accent-green: #10b981;
+            --accent-orange: #f59e0b;
+            --accent-red: #ef4444;
+            --text: #f8fafc;
+            --muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, Tahoma, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 16px;
+            overflow-x: hidden;
+        }
+
+        .ambient {
+            position: fixed;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            pointer-events: none;
+        }
+        .glow-1 { top: -60px; right: -60px; background: rgba(99, 102, 241, 0.22); }
+        .glow-2 { bottom: -60px; left: -60px; background: rgba(6, 182, 212, 0.18); }
+
+        .container {
+            width: 100%;
+            max-width: 620px;
+            margin: auto 0;
+        }
+
+        /* نوار زمان و سال تحصیلی */
+        .badge-header {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 8px 16px;
+            font-size: 0.8rem;
+            text-align: center;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent);
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        /* معرفی کاندیدا */
+        .profile {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .profile h1 {
+            font-size: 1.7rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffffff, #c7d2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 4px;
+        }
+        .profile p {
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        .resume-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 10px;
+        }
+        .tag {
+            background: rgba(99, 102, 241, 0.12);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: #c7d2fe;
+            font-size: 0.72rem;
+            padding: 4px 10px;
+            border-radius: 8px;
+        }
+
+        /* کارت بازی و اسلایدها */
+        .app-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .progress-container {
+            margin-bottom: 18px;
+        }
+        .progress-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+        .progress-bar {
+            height: 6px;
+            width: 100%;
+            background: rgba(255,255,255,0.08);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.35s ease;
+        }
+
+        .slide-content {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .slide-step {
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .slide-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.5;
+        }
+
+        .slide-desc {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin-bottom: 4px;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            padding: 13px 16px;
+            border-radius: 14px;
+            color: #e2e8f0;
+            font-size: 0.88rem;
+            text-align: right;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .option-btn:hover {
+            background: rgba(99, 102, 241, 0.12);
+            border-color: var(--primary);
+            transform: translateY(-1px);
+        }
+        .option-btn:active {
+            transform: translateY(0);
+        }
+
+        /* اسلاید خوش‌آمد */
+        .intro-view {
+            text-align: center;
+            padding: 10px 0;
+        }
+        .intro-view h2 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+        .intro-view p {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .btn-start {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+            transition: 0.2s;
+        }
+        .btn-start:hover {
+            transform: scale(1.02);
+        }
+
+        /* صفحه نتیجه نهایی */
+        .result-view {
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 10px auto 14px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid var(--accent);
+            background: rgba(6, 182, 212, 0.08);
+            box-shadow: 0 0 25px rgba(6, 182, 212, 0.2);
+        }
+        .score-val {
+            font-size: 2.1rem;
+            font-weight: 900;
+            color: #fff;
+        }
+        .score-lbl {
+            font-size: 0.72rem;
+            color: var(--muted);
+        }
+
+        .manifesto-box {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: right;
+            margin: 18px 0;
+            border-right: 3px solid var(--accent);
+        }
+        .manifesto-box h4 {
+            color: var(--accent);
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+        .manifesto-box ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 0.83rem;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(6, 182, 212, 0.15));
+            border: 1px solid rgba(99, 102, 241, 0.35);
+            border-radius: 14px;
+            padding: 14px;
+            margin-top: 10px;
+            font-size: 0.88rem;
+            color: #f8fafc;
+            line-height: 1.6;
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--muted);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient glow-1"></div>
+    <div class="ambient glow-2"></div>
+
+    <div class="container">
+
+        <!-- نوار اعلان -->
+        <div class="badge-header">
+            <span class="pulse-dot"></span>
+            <span>انتخابات شورای دانش‌آموزی سال تحصیلی ۱۴۰۵–۱۴۰۶ | سه‌شنبه یا چهارشنبه</span>
+        </div>
+
+        <!-- معرفی کاندیدا و سوابق گذشته -->
+        <header class="profile">
+            <h1>امیرحسن صادقی علوی</h1>
+            <p>کاندیدای دهم انسانی | دبیرستان نمونه دولتی معلم (تأسیس ۱۳۷۵)</p>
+            <div class="resume-tags">
+                <span class="tag">سابقه عضویت در شورا (سال‌های قبل)</span>
+                <span class="tag">مسئولیت انجمن اسلامی (گذشته)</span>
+                <span class="tag">مسئولیت بسیج دانش‌آموزی (گذشته)</span>
+                <span class="tag">مسئول دانش‌آموزی پرورشی (گذشته)</span>
+                <span class="tag">رتبه برتر تیم رسانه‌ای مدرسه</span>
+            </div>
+        </header>
+
+        <!-- باکس تعاملی ۱۰ اسلایدی -->
+        <div class="app-card">
+
+            <!-- اسلاید ۰: خوش‌آمد -->
+            <div id="intro-screen" class="intro-view">
+                <h2>⚡ شبیه‌ساز انتخاب مسیر مدرسه</h2>
+                <p>
+                    این یک نظرسنجی کلیشه‌ای نیست! در این ۱۰ قدم کوتاه تصمیم بگیر که مدرسه نمونه دولتی معلم چطور اداره بشه. در پایان بر اساس انتخاب‌های واقعی خودت درصد تطابقت با دیدگاه تحولی من محاسبه می‌شه!
+                </p>
+                <button class="btn-start" onclick="startGame()">شروع چالش ۱۰ مرحله‌ای 🚀</button>
+            </div>
+
+            <!-- بخش کوئیز / اسلایدها -->
+            <div id="quiz-wrapper" style="display: none;">
+                <div class="progress-container">
+                    <div class="progress-meta">
+                        <span id="slide-num">اسلاید ۱ از ۱۰</span>
+                        <span id="dynamic-alignment">درصد هماهنگی: در حال ارزیابی...</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                </div>
+
+                <div class="slide-content">
+                    <span class="slide-step" id="slide-category">موضوع</span>
+                    <h3 class="slide-title" id="slide-title">عنوان مرحله</h3>
+                    <p class="slide-desc" id="slide-desc">توضیح مرحله</p>
+                    <div class="options-list" id="options-box"></div>
+                </div>
+            </div>
+
+            <!-- اسلاید ۱۱: نتیجه نهایی و مانیفست -->
+            <div id="result-screen" class="result-view">
+                <div class="score-circle">
+                    <div class="score-val" id="final-pct">0%</div>
+                    <div class="score-lbl">میزان انطباق فکری</div>
+                </div>
+
+                <h3 id="result-verdict" style="color: #fff; margin-bottom: 6px;">نتیجه ارزیابی</h3>
+                <p id="result-subtext" style="color: var(--muted); font-size: 0.85rem;"></p>
+
+                <div class="manifesto-box">
+                    <h4>🎯 خلاصه برنامه‌ها و رویکرد امیرحسن صادقی علوی:</h4>
+                    <ul>
+                        <li>✨ <strong>فضای مطالعه دهه کنونی:</strong> کتابخونه و سالن مطالعه الان استفاده می‌شن اما بچه‌ها واقعاً اذیت می‌شن؛ هدف ما بازسازی فازبندی‌شده، ارگونومی صندلی‌ها و بهبود نور با خلاقیت بچه‌هاست.</li>
+                        <li>⚡ <strong>تغییر رادیکال در برنامه‌های پرورشی:</strong> خداحافظی با سر صف ایستادن‌های تکراری دهه ۷۰؛ برگزاری اتاق فرار علمی، تئاتر تعاملی و مسابقات ایده‌پردازی.</li>
+                        <li>📢 <strong>شورای پیگیر و شنوا:</strong> پایان جلسات نمایشی؛ راه‌اندازی پل ارتباطی هفتگی در شاد و ایتا برای بازتاب مستقیم مشکلات به مدیریت.</li>
+                    </ul>
+                </div>
+
+                <div class="cta-box">
+                    <strong>چرا رأی به امیرحسن صادقی علوی؟</strong><br>
+                    ایده‌های قشنگ زیاد مطرح می‌شه، اما تجربه ارتباط با کادر و مسئولیت‌های سال‌های گذشته نشان داده چطور می‌شه حرف دانش‌آموز رو بدون تعارف و با احترام به عمل تبدیل کرد. با رأی شما، این برنامه‌ها از هفته اول آبان وارد فاز اجرا می‌شن.
+                </div>
+
+                <button class="btn-start" onclick="restartQuiz()" style="margin-top: 15px; background: rgba(255,255,255,0.08); border: 1px solid var(--border); font-size: 0.82rem; padding: 8px 18px;">
+                    🔄 بررسی مجدد مسیر
+                </button>
+            </div>
+
+        </div>
+
+        <footer>
+            امیرحسن صادقی علوی | کاندیدای دهم انسانی | سال تحصیلی ۱۴۰۵–۱۴۰۶
+        </footer>
+
+    </div>
+
+    <script>
+        const slides = [
+            {
+                cat: "گام ۱: تعریف شورا",
+                title: "از نظر تو شورای دانش‌آموزی دقیقاً چه کاره‌ست؟",
+                desc: "نقش واقعی نماینده‌های ما بین بچه‌ها و مدیریت مدرسه چی باید باشه؟",
+                options: [
+                    { text: "فقط مجری مراسمات و تقسیم کیک و آبمیوه سر صف! 🧃", score: 0 },
+                    { text: "زنگ تفریح برای فرار از بعضی کلاس‌ها و فرمالیته بودن! 😴", score: 1 },
+                    { text: "تریبون واقعی و وکیل مدافع صنف دانش‌آموز برای تغییر وضع موجود 🎯", score: 3 }
+                ]
+            },
+            {
+                cat: "گام ۲: کتابخانه و سالن مطالعه",
+                title: "وضعیت کتابخانه و سالن مطالعه مدرسه (تأسیس ۱۳۷۵) رو چطور می‌بینی؟",
+                desc: "ما همگی داریم از این فضاها استفاده می‌کنیم، اما واقعیت اینه که شرایط فعلی بچه‌ها رو اذیت می‌کنه.",
+                options: [
+                    { text: "همین که هست خوبه، بالاخره مال سال ۷۵ هست و نباید دست بهش زد!", score: 0 },
+                    { text: "چون فرسوده‌ست کلاً درش رو ببندیم و کسی استفاده نکنه!", score: 1 },
+                    { text: "بهسازی مرحله‌ای صندلی‌ها، نور و استانداردسازی برای دهه کنونی با مشارکت بچه‌ها 📚", score: 3 }
+                ]
+            },
+            {
+                cat: "گام ۳: برنامه‌های پرورشی و مناسبت‌ها",
+                title: "روزهای خاص و ایام دهه فجر چطور برگزار بشه؟",
+                desc: "بین برنامه‌های یک‌طرفه قدیمی و برنامه‌های مدرن کدوم رو ترجیح می‌دی؟",
+                options: [
+                    { text: "سخنرانی‌های طولانی سر صف و برنامه‌های دهه شصتی و هفتادی 🥱", score: 0 },
+                    { text: "هیچ برنامه‌ای برگزار نشه، فقط بریم خونه!", score: 1 },
+                    { text: "اتاق فرار (Escape Room)، رقابت‌های زنده، بازی‌های گروهی و نمایشگاه تعاملی ⚡", score: 3 }
+                ]
+            },
+            {
+                cat: "گام ۴: سوابق اجرایی در مدرسه",
+                title: "به نظرت تجربه قبلی کاندیدا در تشکل‌ها و شورا چقدر مهمه؟",
+                desc: "من در سال‌های گذشته مسئولیت انجمن، بسیج، پرورشی و تیم رسانه رو داشتم.",
+                options: [
+                    { text: "مهم نیست، هرکی وعده غیرممکن بده جذاب‌تره!", score: 0 },
+                    { text: "تجربه کارهای اجرایی سال‌های گذشته نشون می‌ده کی می‌تونه ایده رو عملی کنه 🛠️", score: 3 },
+                    { text: "فقط رفاقت مهمه، کارنامه و سابقه تأثیری نداره!", score: 1 }
+                ]
+            },
+            {
+                cat: "گام ۵: شنیدن صدای بچه‌ها",
+                title: "شورا چطور باید از نظر تک‌تک بچه‌ها باخبر بشه؟",
+                desc: "ارتباط نباید به زمان انتخابات محدود بشه.",
+                options: [
+                    { text: "هر ۴ ماه یک‌بار شاید یک جلسه بگذارن پشت درهای بسته!", score: 0 },
+                    { text: "یک صندوق نظرخواهی در گوشه راهرو که ماهی یک‌بار هم باز نشه!", score: 1 },
+                    { text: "کانال تعاملی، فرم‌های هفتگی و نماینده مستقیم از هر کلاس برای انتقال بدون تعارف 📢", score: 3 }
+                ]
+            },
+            {
+                cat: "گام ۶: امور رفاهی و بوفه",
+                title: "در مورد کیفیت امکانات و رفاه داخل مدرسه چه رویکردی درسته؟",
+                desc: "از آبخوری و بوفه گرفته تا سیستم گرمایش/سرمایش کلاس‌ها.",
+                options: [
+                    { text: "اعتراض فایده نداره، باید با همه چیز ساخت و سوخت!", score: 0 },
+                    { text: "پیگیری مدام و مستند توسط شورا تا زمان استاندارد شدن تغذیه و رفاهیات 🥪", score: 3 },
+                    { text: "قول بدم همه چیز مجانی می‌شه (وعده توخالی انتخاباتی)!", score: 1 }
+                ]
+            },
+            {
+                cat: "گام ۷: زنگ‌های تفریح و فضای ورزشی",
+                title: "برای نشاط و امکانات ورزشی حیاط چه پیشنهادی داری؟",
+                desc: "تحرک بچه‌ها در زنگ تفریح انرژی ساعات بعد رو تأمین می‌کنه.",
+                options: [
+                    { text: "یک توپ فرسوده باشه و هرکس خودش سرگرم بشه!", score: 0 },
+                    { text: "لیگ‌های کلاسی منظم (گل‌کوچیک، والیبال، بردگیم) با جوایز انگیزشی 🏆", score: 3 },
+                    { text: "حیاط فقط برای ایستادن و منتظر زنگ موندنه!", score: 1 }
+                ]
+            },
+            {
+                cat: "گام ۸: امور علمی و کنکور",
+                title: "همکاری شورا با کادر آموزشی چطور باید باشه؟",
+                desc: "مخصوصاً برای سال‌های دهم و متوسطه دوم که معدل و کنکور نهایی مهمه.",
+                options: [
+                    { text: "شورا فقط مال تفریحه و به درس و آزمون‌ها کاری نداره!", score: 0 },
+                    { text: "تشکیل کارگاه‌های رفع اشکال هم‌سالان و بهینه‌سازی سالن مطالعه برای کنکوری‌ها 📖", score: 3 },
+                    { text: "فقط فشار آوردن برای لغو امتحانات بدون منطق!", score: 1 }
+                ]
+            },
+            {
+                cat: "گام ۹: ارتباط با مدیریت",
+                title: "اگر مدیریت مدرسه با ایده‌ای مخالفت کرد، شورا چیکار کنه؟",
+                desc: "مرز بین بی‌تفاوتی و مطالبه‌گری اصولی کجاست؟",
+                options: [
+                    { text: "فوری کوتاه بیاد و بگه مدیر نذاشت پس ولش کن!", score: 0 },
+                    { text: "طرح مدون و کم‌هزینه ببره و با ادله قانونی حق دانش‌آموز رو پیگیری کنه 💡", score: 3 },
+                    { text: "شورش و ایجاد حاشیه بیهوده بدون منطق!", score: 1 }
+                ]
+            },
+            {
+                cat: "گام ۱۰: سال تحصیلی ۱۴۰۵-۱۴۰۶",
+                title: "انتظار اصلی تو از سال تحصیلی ۱۴۰۵–۱۴۰۶ چیه؟",
+                desc: "آخرین قدم؛ برای انتخاب نماینده آینده‌ت.",
+                options: [
+                    { text: "یک سال آروم و خسته‌کننده بدون هیچ تغییر محسوسی در مدرسه!", score: 0 },
+                    { text: "سالی که کتابخونه، برنامه‌ها و صدای دانش‌آموز متحول بشه با کارهای واقعی 🚀", score: 3 },
+                    { text: "فقط سریع بگذره تموم شه بره!", score: 1 }
+                ]
+            }
+        ];
+
+        let currentIdx = 0;
+        let totalScore = 0;
+        const maxScore = slides.length * 3; // 30
+
+        function startGame() {
+            document.getElementById('intro-screen').style.display = 'none';
+            document.getElementById('quiz-wrapper').style.display = 'block';
+            currentIdx = 0;
+            totalScore = 0;
+            loadSlide();
+        }
+
+        function loadSlide() {
+            const s = slides[currentIdx];
+            document.getElementById('slide-num').innerText = `اسلاید ${currentIdx + 1} از ${slides.length}`;
+            document.getElementById('slide-category').innerText = s.cat;
+            document.getElementById('slide-title').innerText = s.title;
+            document.getElementById('slide-desc').innerText = s.desc;
+
+            // نوار درصد پیشرفت اسلاید
+            const pctProg = ((currentIdx) / slides.length) * 100;
+            document.getElementById('progress-fill').style.width = pctProg + '%';
+
+            // تولید گزینه‌ها
+            const box = document.getElementById('options-box');
+            box.innerHTML = '';
+
+            s.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerHTML = `<span>${opt.text}</span><span>›</span>`;
+                btn.onclick = () => selectOption(opt.score);
+                box.appendChild(btn);
+            });
+        }
+
+        function selectOption(pts) {
+            totalScore += pts;
+            currentIdx++;
+
+            if (currentIdx < slides.length) {
+                loadSlide();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function finishQuiz() {
+            document.getElementById('quiz-wrapper').style.display = 'none';
+            document.getElementById('result-screen').style.display = 'block';
+
+            // محاسبه درصد واقعی
+            const finalPercent = Math.round((totalScore / maxScore) * 100);
+            document.getElementById('final-pct').innerText = finalPercent + '%';
+
+            const verdict = document.getElementById('result-verdict');
+            const sub = document.getElementById('result-subtext');
+
+            if (finalPercent >= 80) {
+                verdict.innerText = "🔥 تطابق فوق‌العاده؛ هم‌مسیر و هم‌فکر!";
+                sub.innerText = "نگاهت به وضعیت مدرسه دقیقاً همون چیزیه که من برای سال ۱۴۰۵-۱۴۰۶ برنامه ریختم. وقتشه فضای مدرسه رو از خمودگی دربیاریم.";
+            } else if (finalPercent >= 50) {
+                verdict.innerText = "⚡ تطابق نسبی؛ هم‌پوشانی در اولویت‌ها!";
+                sub.innerText = "در بخش‌هایی از بهسازی سالن مطالعه و روش‌های جدید شورا هم‌عقیده‌ایم، اما هنوز نظراتت می‌تونه برنامه‌های ما رو کامل‌تر کنه.";
+            } else {
+                verdict.innerText = "👀 نگاه متفاوت؛ اما نظر تو هم محترمه!";
+                sub.innerText = "انتخاب‌هات نشون می‌ده یا به وضعیت سنتی عادت کردی یا ناامیدی؛ اما هدف من دقیقاً اینه که بهت ثابت کنم مدرسه می‌تونه جای جذاب‌تری باشه.";
+            }
+        }
+
+        function restartQuiz() {
+            document.getElementById('result-screen').style.display = 'none';
+            document.getElementById('intro-screen').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
